@@ -1,0 +1,21 @@
+dealers:
+  - dealer1:
+      name: YAML Ain't Markup Language
+      id: 37395
+      agents:
+        - standard_agent:
+            username: krishna
+            password: Please11
+        - manager_agent:
+            username: krishna
+            password: Please11
+  - dealer2:
+      name: YAML Ain't Markup Language
+      id: 37395
+      agents:
+        - standard_agent:
+            username: krishna
+            password: Please11
+        - manager_agent:
+            username: krishna
+            password: Please11
