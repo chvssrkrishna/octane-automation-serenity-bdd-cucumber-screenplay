@@ -8,10 +8,9 @@ import java.io.IOException;
 public class CN_Auth_Trusted_Device {
 
     private Properties prop=null;
-    //String filePath="/src/main/resources/agent_cn_session.properties";
-    String filePath="/agent_cn_session.properties";
+    String filePath="/src/main/resources/";
     public CN_Auth_Trusted_Device(String env){
-        filePath="/"+env+"_agent_cn_session.properties";
+        filePath=filePath + env+"_agent_cn_session.properties";
         File file = new File(ResourceHelper.getAbsolutePath(filePath));
         try {
             file.createNewFile();
