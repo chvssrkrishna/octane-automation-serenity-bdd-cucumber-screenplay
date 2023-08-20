@@ -23,7 +23,7 @@ public class AddCookie implements Performable {
         BrowseTheWeb.as(actor).getDriver().manage().addCookie(new Cookie(cookieName, cookieValue));
     }
 
-    public static AddCookie called(String cookieName,String cookieValue) {
+    public static AddCookie toBrowser(String cookieName,String cookieValue) {
         return new AddCookie(cookieName, cookieValue);
     }
 }

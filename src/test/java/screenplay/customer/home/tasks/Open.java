@@ -1,7 +1,8 @@
 package screenplay.customer.home.tasks;
 
 import helpers.constants.WaitConstants;
-import screenplay.wait.tasks.WaitForElement;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Switch;
@@ -12,13 +13,15 @@ import screenplay.customer.home.Home_Page;
 
 import java.time.Duration;
 
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+
 public class Open {
 
     public static Task chat_window_via_IconButton(String button) {
         return Task.where(
                 "{0} open Chat Window via Icon Button " + button,
                 Click.on(Home_Page.ICON_BUTTON.of(button)),
-                WaitForElement.visibility(Home_Page.CHATPANEL_IFRAME, WaitConstants.getExplicitWait()),
+                WaitUntil.the(Home_Page.CHATPANEL_IFRAME, isVisible()).forNoMoreThan(WaitConstants.getExplicitWait()).seconds(),
                 Switch.toFrame(Home_Page.CHATPANEL_IFRAME_NAME)
         );
 
@@ -30,7 +33,7 @@ public class Open {
                 "{0} open Chat Window via Icon Button " + button,
                 Open.chat_window_via_IconButton(button),
                 Check.whether(Presence.of(Chat_Window_Page.DEPARTMENT_SELECTOR_FORM.waitingForNoMoreThan(Duration.ofSeconds(WaitConstants.getExplicitWait())))).andIfSo(Click.on(Chat_Window_Page.DEFAULT_DEPARTMENT_SELECTOR)),
-                WaitForElement.visibility(Chat_Window_Page.CHATPANEL_ENTER_YOUR_MESSAGE, WaitConstants.getExplicitWait())
+                WaitUntil.the(Chat_Window_Page.CHATPANEL_ENTER_YOUR_MESSAGE, isVisible()).forNoMoreThan(WaitConstants.getExplicitWait()).seconds()
         );
 
     }
@@ -39,8 +42,8 @@ public class Open {
         return Task.where(
                 "{0} open Chat Window via Icon Button " + button+" and department "+department,
                 Open.chat_window_via_IconButton(button),
-                Check.whether(Presence.of(Chat_Window_Page.DEPARTMENT_SELECTOR.of(department).waitingForNoMoreThan(Duration.ofSeconds(WaitConstants.getExplicitWait())))).andIfSo(Click.on(Chat_Window_Page.DEPARTMENT_SELECTOR.of(department))),
-                WaitForElement.visibility(Chat_Window_Page.CHATPANEL_ENTER_YOUR_MESSAGE, WaitConstants.getExplicitWait())
+                Check.whether(Presence.of(Chat_Window_Page.DEPARTMENT_SELECTOR.of(department).waitingForNoMoreThan(Duration.ofSeconds(WaitConstants.getExplicitWait())))).andIfSo(Click.on(Chat_Window_Page.DEPARTMENT_SELECTOR.of(department)))
+
         );
 
     }
